@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j2
 public class SampleController {
 
+    @PreAuthorize("permitAll()")
     @GetMapping("ex1")
     public void ex1(){
         log.info("ex1");
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("ex2")
     public void ex2(){
         log.info("ex2");
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN")
     @GetMapping("ex3")
     public void ex3(){
         log.info("ex3");
