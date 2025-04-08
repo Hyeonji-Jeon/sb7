@@ -66,11 +66,32 @@ public class BoardTests {
         replies.forEach(arr -> {
             log.info("------------------");
             log.info(Arrays.toString(arr));
-
         });
-
-
     }
 
+    @Transactional
+    @Test
+    public void testListGrouping3() {
 
+        //step1 페이징 되는 게시글들만 얻어온다.
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+        //1페이지에 해당하는 Board 들만 추출
+        Page<Object[]> pagingResult = boardRepo.listOfPage(pageable);
+
+        //bno만 추출
+        List<Integer> bnos = pagingResult.stream()
+                .map(arr -> {
+                    log.info(Arrays.toString(arr));
+                    return Integer.parseInt(arr[0].toString());
+                })
+                .collect(Collectors.toList());
+
+        List<Object[]> replies = replyRepo.listOfBnos(bnos);
+
+        replies.forEach(arr -> {
+            log.info("------------------");
+            log.info(Arrays.toString(arr));
+        });
+    }
 }

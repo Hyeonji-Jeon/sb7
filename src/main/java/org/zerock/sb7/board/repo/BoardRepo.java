@@ -8,6 +8,11 @@ import org.zerock.sb7.board.domain.Board;
 
 public interface BoardRepo extends JpaRepository<Board, Integer> {
 
+    @Query("select b.bno, b.title, b.writer , count(f) " +
+            " from Board b left join Favorite f on f.board = b " +
+            " group by b")
+    Page<Object[]> listOfPage(Pageable pageable);
+
     //Pageable이 파라미터면 무조건 리턴타입은 Page 타입
 
     @Query("""
