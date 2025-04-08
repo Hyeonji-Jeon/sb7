@@ -5,7 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter
-@ToString
+@ToString(exclude = "board")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,10 +22,11 @@ public class Favorite {
 
     private Choice choice;
 
-
-
-
 }
+
+
+
+
 
 
 

@@ -19,6 +19,6 @@ public class SecurityTests {
         String encode = passwordEncoder.encode("1111");
 
         log.info(encode);
-
     }
+
 }

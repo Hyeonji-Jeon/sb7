@@ -16,5 +16,4 @@ public class BoardImage {
     private int ord;
 
 
-
 }

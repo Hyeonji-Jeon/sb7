@@ -18,7 +18,7 @@ public class CustomUserDetailsService  implements UserDetailsService {
 
         UserDetails sampleUser = User.builder()
                 .username(username)
-                .password("$2a$10$qctiG3YhmGgI31UzbEsXuuG1n1wN0O4O0n9aroQqrRW7Z/jEgeNUO")
+                .password("$2a$10$Hyj0kg7Dl9jaelSNVTdvFO9GbY9L5lUWcMMCrcodu8jEEc/6vcRl.")
                 .roles("USER")
                 .build();
 
