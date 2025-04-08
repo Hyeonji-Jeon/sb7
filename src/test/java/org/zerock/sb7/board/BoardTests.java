@@ -91,7 +91,12 @@ public class BoardTests {
 
         replies.forEach(arr -> {
             log.info("------------------");
-            log.info(Arrays.toString(arr));
+            Reply reply = (Reply) arr[0];
+            Board board = (Board) arr[1];
+
+            log.info(board);
+            log.info(board.getImages());
+
         });
     }
 }
