@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@ToString
+@ToString(exclude = "images")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
