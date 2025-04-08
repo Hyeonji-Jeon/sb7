@@ -2,12 +2,11 @@ package org.zerock.sb7.board.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
+import org.hibernate.annotations.BatchSize;
 
 @Entity
 @Getter
-@ToString
+@ToString(exclude = "board")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,11 +20,8 @@ public class Reply {
 
     private String mid;
 
-    private LocalDate regDate;
-
-    private LocalDate modDate;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
+
 
 }

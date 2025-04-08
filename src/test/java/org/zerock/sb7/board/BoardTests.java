@@ -8,11 +8,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
+import org.zerock.sb7.board.domain.Board;
+import org.zerock.sb7.board.domain.Reply;
 import org.zerock.sb7.board.repo.BoardRepo;
 import org.zerock.sb7.board.repo.FavoriteRepo;
 import org.zerock.sb7.board.repo.ReplyRepo;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 @Log4j2
@@ -33,6 +38,37 @@ public class BoardTests {
         Page<Object[]> result = boardRepo.list1(pageable);
 
         result.forEach(arr -> log.info(Arrays.toString(arr)));
+
+    }
+
+    @Transactional
+    @Test
+    public void testListGrouping2() {
+
+        //step1 페이징 되는 게시글들만 얻어온다.
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+        //1페이지에 해당하는 Board 들만 추출
+        Page<Board> boardResult = boardRepo.findAll(pageable);
+
+        //게시물 10개만 추출
+        List<Board> boardList = boardResult.getContent();
+        //bno만 추출
+        List<Integer> bnos = boardList.stream().map(Board::getBno).collect(Collectors.toList());
+
+        //List<Integer> bnos = Arrays.asList(1, 2, 3,4,5,6,7,8,9,10);
+
+        List<Object[]> replies = replyRepo.listOfBnos(bnos);
+
+        //log.info("BoardList", boardList);
+        log.info("Replies");
+
+        replies.forEach(arr -> {
+            log.info("------------------");
+            log.info(Arrays.toString(arr));
+
+        });
+
 
     }
 
