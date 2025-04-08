@@ -96,6 +96,7 @@ public class BoardTests {
 
             log.info(board);
             log.info(board.getImages());
+            log.info(board.getTags());
 
         });
     }
