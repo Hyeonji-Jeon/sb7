@@ -5,8 +5,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.zerock.sb7.board.domain.Board;
+import org.zerock.sb7.board.repo.search.BoardSearch;
 
-public interface BoardRepo extends JpaRepository<Board, Integer> {
+public interface BoardRepo extends JpaRepository<Board, Integer>, BoardSearch {
 
     @Query("select b.bno, b.title, b.writer , bi.fileName, count(f) " +
             " from Board b " +
