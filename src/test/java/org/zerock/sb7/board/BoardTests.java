@@ -100,4 +100,31 @@ public class BoardTests {
 
         });
     }
+
+    @Test
+    public void testQuerydsl() {
+
+        boardRepo.search();
+
+    }
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
