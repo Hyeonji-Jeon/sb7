@@ -30,7 +30,7 @@ public class CustomSecurityConfig {
         log.info("------------------Security Config-----------------------");
 
         http.formLogin(config -> {
-           //config.loginPage("/login");
+           config.loginPage("/member/login");
         });
 
         http.rememberMe(config -> {
