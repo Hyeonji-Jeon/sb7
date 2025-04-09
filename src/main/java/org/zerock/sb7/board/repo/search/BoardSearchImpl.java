@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.zerock.sb7.board.domain.*;
 import org.zerock.sb7.board.dto.BoardListDTO;
+import org.zerock.sb7.board.dto.PageRequestDTO;
+import org.zerock.sb7.board.dto.PageResponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +25,7 @@ public class BoardSearchImpl implements BoardSearch {
     private final JPQLQueryFactory queryFactory;
 
     @Override
-    public void search() {
+    public PageResponseDTO<BoardListDTO> search(PageRequestDTO pageRequestDTO) {
 
         log.info("--------------------------");
         log.info("Searching for boards");
@@ -60,7 +62,10 @@ public class BoardSearchImpl implements BoardSearch {
                 )
         );
 
-        log.info(dtoQuery.fetch());
+        List<BoardListDTO> dtoList = dtoQuery.fetch();
+
+        int total = (int)dtoQuery.fetchCount();
+
 
 
 //        log.info("----------------------------");
@@ -72,6 +77,12 @@ public class BoardSearchImpl implements BoardSearch {
 //
 //        log.info("Found {} boards", bnos);
 
+        return PageResponseDTO.<BoardListDTO>withAll()
+                .dtoList(dtoList)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
 
     }
+
 }
