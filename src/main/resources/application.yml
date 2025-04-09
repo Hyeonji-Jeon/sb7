@@ -33,8 +33,8 @@ spring:
       client:
         registration:
           kakao:
-            client-id: 455a16c2a0b82cfc12890c4d632f730d
-            client-secret: 4msnYXEY8d5VQY3YhjBDxXQdYP8R3SyQ
+            client-id: rest 키
+            client-secret: 보안 시크릿 키
             scope:
               - account_email
               - profile_nickname
