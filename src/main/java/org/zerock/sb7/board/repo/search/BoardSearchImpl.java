@@ -1,5 +1,6 @@
 package org.zerock.sb7.board.repo.search;
 
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.JPQLQuery;
@@ -7,6 +8,8 @@ import com.querydsl.jpa.JPQLQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.zerock.sb7.board.domain.*;
+
+import static org.zerock.sb7.board.domain.QReply.reply;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -26,10 +29,12 @@ public class BoardSearchImpl implements BoardSearch {
         QBoard board = QBoard.board;
         QFavorite favorite = QFavorite.favorite;
         QBoardImage boardImage = QBoardImage.boardImage;
+        QReply reply = QReply.reply;
 
         JPQLQuery<Board> query = queryFactory.selectFrom(board);
         query.leftJoin(board.images, boardImage);
         query.leftJoin(favorite).on(favorite.board.eq(board));
+        query.leftJoin(reply).on(reply.board.eq(board));
 
         query.where(favorite.choice.eq(Choice.LIKE));
         query.where(boardImage.ord.eq(0));
@@ -39,10 +44,11 @@ public class BoardSearchImpl implements BoardSearch {
         query.offset(offset);
         query.orderBy(new OrderSpecifier<>(Order.DESC, board.bno));
 
-        log.info("--------------------------");
-        log.info(query);
+        JPQLQuery<Tuple> listTupleQuery = query.select(board.bno, board.title, board.writer, boardImage.fileName,
+                favorite.countDistinct(), reply.countDistinct());
 
-        query.fetch();
+        log.info("--------------------------");
+        listTupleQuery.fetch();
 
     }
 }
