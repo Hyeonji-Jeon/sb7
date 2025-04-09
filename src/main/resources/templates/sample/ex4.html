@@ -6,19 +6,25 @@
 </head>
 <body>
 
-    <h1>Sample Ex4 Page</h1>
+<h1>Sample Ex4 Page</h1>
 
-    <div>[[ ${dto} ]]</div>
+<div>[[ ${dto} ]]</div>
 
-    <div>로그인한 사용자와 dto의 author가 일치하는지 체크</div>
+<div>로그인한 사용자와 dto의 author가 일치하는지 체크 </div>
 
-    <div>[[ ${ #authentication } ]]</div>
+<div>회원의 이메일 [[ ${ #authentication.principal.email } ]] </div>
 
-    <script th:inline="javascript">
+<div th:with="email = ${ #authentication.principal.email }">
 
-        const auth = [[${ #authentication }]];
+    이메일 주소 : [[${email}]]
 
-    </script>
+</div>
+
+<script th:inline="javascript">
+
+    const auth = [[${#authentication}]]
+
+</script>
 
 </body>
 </html>
