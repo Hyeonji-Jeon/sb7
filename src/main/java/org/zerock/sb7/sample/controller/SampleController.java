@@ -5,9 +5,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.sb7.sample.controller.dto.SampleDTO;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/sample")
@@ -37,6 +40,18 @@ public class SampleController {
     @GetMapping("ex3")
     public void ex3(){
         log.info("ex3");
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("ex4")
+    public void ex4(Model model){
+
+        SampleDTO dto = new SampleDTO();
+        dto.setAuthor("user02");
+        dto.setTitle("Sample Title by user02");
+
+        model.addAttribute("dto", dto);
+
     }
 
     @PreAuthorize("#dto.author == authentication.name")
