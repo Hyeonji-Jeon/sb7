@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.zerock.sb7.board.domain.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.zerock.sb7.board.domain.QReply.reply;
 
 @Log4j2
@@ -36,7 +39,7 @@ public class BoardSearchImpl implements BoardSearch {
         query.leftJoin(favorite).on(favorite.board.eq(board));
         query.leftJoin(reply).on(reply.board.eq(board));
 
-        query.where(favorite.choice.eq(Choice.LIKE));
+        //query.where(favorite.choice.eq(Choice.LIKE));
         query.where(boardImage.ord.eq(0));
         query.groupBy(board);
 
@@ -44,11 +47,21 @@ public class BoardSearchImpl implements BoardSearch {
         query.offset(offset);
         query.orderBy(new OrderSpecifier<>(Order.DESC, board.bno));
 
-        JPQLQuery<Tuple> listTupleQuery = query.select(board.bno, board.title, board.writer, boardImage.fileName,
-                favorite.countDistinct(), reply.countDistinct());
+        JPQLQuery<Tuple> listTupleQuery = query.select(
+                board.bno, board.title, board.writer, boardImage.fileName,
+                favorite.choice.eq(Choice.LIKE).countDistinct(),
+                reply.countDistinct());
 
-        log.info("--------------------------");
-        listTupleQuery.fetch();
+
+        log.info("----------------------------");
+
+        List<Tuple> results = listTupleQuery.fetch();
+
+        List<Integer> bnos =
+                results.stream().map(tuple -> tuple.get(0, Integer.class)).collect(Collectors.toUnmodifiableList());
+
+        log.info("Found {} boards", bnos);
+
 
     }
 }
