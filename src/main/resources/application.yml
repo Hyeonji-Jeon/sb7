@@ -28,6 +28,29 @@ spring:
     init:
       mode: never
 
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 455a16c2a0b82cfc12890c4d632f730d
+            client-secret: 4msnYXEY8d5VQY3YhjBDxXQdYP8R3SyQ
+            scope:
+              - account_email
+              - profile_nickname
+              - profile_image
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            client-name: Kakao
+            client-authentication-method: client_secret_post
+
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
 #?? ??
 logging:
   level:

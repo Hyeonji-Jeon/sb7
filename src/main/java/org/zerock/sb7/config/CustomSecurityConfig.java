@@ -41,6 +41,8 @@ public class CustomSecurityConfig {
 
         http.csrf(config -> { config.disable();});
 
+        http.oauth2Login(config -> {});
+
         return http.build();
     }
 
