@@ -6,7 +6,15 @@
 </head>
 <body>
     <form action="/sample/exUpload" method="post" enctype="multipart/form-data">
-
+        <div>
+            <input type="text" name="title" required>
+        </div>
+        <div>
+            <input type="file" name="files" multiple required>
+        </div>
+        <div>
+            <button>SUBMIT</button>
+        </div>
     </form>
 </body>
 </html>
