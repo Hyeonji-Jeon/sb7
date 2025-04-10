@@ -26,8 +26,8 @@ public class FileUploadUtil {
         log.info("---------post construct---------");
         log.info("uploadDir: " + uploadDir);
 
-        Resource resource = resourceLoader.getResource("classpath:/upload/somefile.txt");
-        File uploadDirFile = new File(uploadDir);
+        Resource resource = resourceLoader.getResource(uploadDir);
+        File uploadDirFile = resource.getFile();
 
         log.info("uploadDirFile: " + uploadDirFile.getAbsolutePath());
 
