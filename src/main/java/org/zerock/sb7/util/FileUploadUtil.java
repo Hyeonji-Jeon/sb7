@@ -5,8 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Log4j2
@@ -30,6 +33,13 @@ public class FileUploadUtil {
         if(!uploadDirFile.exists()){
             uploadDirFile.mkdirs();
         }
+    }
+
+    public List<String> uploadFiles(List<MultipartFile> files) throws Exception {
+
+        List<String> uploadedFileNames = new ArrayList<>();
+
+        return uploadedFileNames;
 
     }
 
