@@ -78,11 +78,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                     .roleSet(Set.of(MemberRole.USER))
                     .build();
             memberRepo.save(newbie);
+            member = newbie;
         }
 
-        String password = passwordEncoder.encode("1111");
-
-        MemberDTO memberDTO = new MemberDTO(email, password);
+        MemberDTO memberDTO = new MemberDTO(member);
 
         return memberDTO;
     }

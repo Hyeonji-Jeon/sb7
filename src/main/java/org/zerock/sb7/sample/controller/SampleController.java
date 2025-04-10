@@ -3,15 +3,12 @@ package org.zerock.sb7.sample.controller;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.sb7.member.dto.MemberDTO;
-import org.zerock.sb7.sample.controller.dto.SampleDTO;
-
-import java.util.List;
+import org.zerock.sb7.sample.dto.dto.SampleDTO;
 
 @Controller
 @RequestMapping("/sample")

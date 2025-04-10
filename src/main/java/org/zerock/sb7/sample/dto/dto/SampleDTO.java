@@ -1,4 +1,4 @@
-package org.zerock.sb7.sample.controller.dto;
+package org.zerock.sb7.sample.dto.dto;
 
 import lombok.Data;
 
