@@ -66,4 +66,4 @@ logging:
 
 org:
   zerock:
-    upload: /upload
+    upload: upload
