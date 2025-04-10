@@ -41,22 +41,18 @@ public class MemberDTO implements UserDetails, OAuth2User {
         this.mid = email;
         this.mpw = mpw;
         this.email = email;
-        this.roleNames = List.of("ROLE_USER");
+        this.roleNames = List.of("USER");
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        System.out.println("--------------getAuthorities");
-
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return roleNames.stream().map(name -> new SimpleGrantedAuthority("ROLE_"+name)).collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-
-        System.out.println("--------------getPassword");
 
         return this.mpw;
     }
