@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.zerock.sb7.member.dto.MemberDTO;
 import org.zerock.sb7.member.repo.MemberRepo;
 
 
@@ -63,7 +64,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         log.info("EMAIL: " + email);
 
-        return super.loadUser(userRequest);
+        String password = passwordEncoder.encode("1111");
+
+        MemberDTO memberDTO = new MemberDTO(email, password);
+
+        return memberDTO;
     }
 
     private String getKakaoEmail(Map<String, Object> paramMap){

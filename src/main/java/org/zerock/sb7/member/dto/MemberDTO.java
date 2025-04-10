@@ -36,6 +36,14 @@ public class MemberDTO implements UserDetails, OAuth2User {
 
     }
 
+    public MemberDTO(String email, String mpw){
+
+        this.mid = email;
+        this.mpw = mpw;
+        this.email = email;
+        this.roleNames = List.of("ROLE_USER");
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
