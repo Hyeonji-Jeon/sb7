@@ -9,7 +9,7 @@ import org.zerock.sb7.member.domain.Member;
 public interface MemberRepo extends JpaRepository<Member, String> {
 
     @EntityGraph(attributePaths = {"roleSet"}, type = EntityGraph.EntityGraphType.FETCH)
-    @Query("select m from Member m where m.mid = :mid and m.social = false")
+    @Query("select m from Member m where m.mid = :mid")
     Member selectOne( @Param("mid") String mid);
 
 }

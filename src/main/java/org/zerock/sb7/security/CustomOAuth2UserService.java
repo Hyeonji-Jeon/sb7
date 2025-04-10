@@ -10,12 +10,15 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.zerock.sb7.member.domain.Member;
+import org.zerock.sb7.member.domain.MemberRole;
 import org.zerock.sb7.member.dto.MemberDTO;
 import org.zerock.sb7.member.repo.MemberRepo;
 
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 
 @Log4j2
@@ -63,6 +66,19 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
 
         log.info("EMAIL: " + email);
+
+        Member member = memberRepo.selectOne(email);
+
+        if(member == null){
+            Member newbie = Member.builder()
+                    .mid(email)
+                    .email(email)
+                    .mpw(passwordEncoder.encode("1111"))
+                    .social(true)
+                    .roleSet(Set.of(MemberRole.USER))
+                    .build();
+            memberRepo.save(newbie);
+        }
 
         String password = passwordEncoder.encode("1111");
 
