@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
@@ -72,6 +72,15 @@
 <body>
 <div class="login-container">
     <h2>로그인</h2>
+
+    <h2 th:if="msg">
+        [[ ${msg} ]]
+    </h2>
+
+    <h2 th:if="logout">
+        [[ ${logout} ]]
+    </h2>
+
     <form action="/member/login" method="post">
         <label for="username">아이디</label>
         <input type="text" id="username" name="username" required>
@@ -80,7 +89,7 @@
         <input type="password" id="password" name="password" required>
 
         <div class="remember">
-            <input type="checkbox" id="remember" name="remember">
+            <input type="checkbox" id="remember" name="remember-me">
             <label for="remember">로그인 상태 유지</label>
         </div>
 
