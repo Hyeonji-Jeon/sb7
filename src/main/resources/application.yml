@@ -66,4 +66,4 @@ logging:
 
 org:
   zerock:
-    upload: classpath:/upload
+    upload: upload
