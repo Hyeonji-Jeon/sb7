@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.zerock.sb7.security.handler.CustomLoginSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -31,6 +32,7 @@ public class CustomSecurityConfig {
 
         http.formLogin(config -> {
            config.loginPage("/member/login");
+           config.successHandler(new CustomLoginSuccessHandler());
         });
 
         http.rememberMe(config -> {

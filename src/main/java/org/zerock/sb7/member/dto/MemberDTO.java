@@ -41,6 +41,7 @@ public class MemberDTO implements UserDetails, OAuth2User {
         this.mid = email;
         this.mpw = mpw;
         this.email = email;
+        this.social = true;
         this.roleNames = List.of("USER");
     }
 
